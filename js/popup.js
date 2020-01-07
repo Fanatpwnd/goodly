@@ -23,7 +23,6 @@ var popup_css = " \
  \
 	background-color: #fefefe;  \
 	margin: 15% auto;  \
-	padding: 20px;  \
 	border: 1px solid #888;  \
  \
 	background-color: white;  \
@@ -40,7 +39,10 @@ var popup_css = " \
 	display: flex;  \
 	align-items: center;  \
 	justify-content: center;  \
-	height: 100%;  \
+    height: 100%;  \
+    background-color: black; \
+    color: white; \
+    font-size: 30px; \
 }  \
  \
 .popup-wrap-footer {  \
@@ -51,9 +53,11 @@ var popup_css = " \
 }  \
  \
 .close-popup {  \
-	width: 200px;  \
+    width: 200px;  \
+    height: 50px; \
 	color: white;  \
-	background-color: green;  \
+    background-color: green;  \
+    border: none; \
 } \
 </style> \
 ";
@@ -99,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <div class="popup js-popup"> \
             <div class="popup-wrap"> \
                 <div class="popup-wrap-body">'+popup.content+'</div> \
-                <div class="popup-wrap-footer"><button class="js-close-popup close-popup">Закрыть попап</button></div> \
+                <div class="popup-wrap-footer"><button class="js-close-popup close-popup"><b>Закрыть попап</b></button></div> \
             </div> \
         </div> \
         </div> \
