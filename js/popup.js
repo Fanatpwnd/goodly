@@ -1,44 +1,46 @@
 
 
 function hitPopup(popup_id) { 
-	$.get("./index.php?r=popup/hit", {"popup_id" : popup_id}); 
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', popup_site+'/index.php?r=popup/hit&popup_id='+popup_id, false);
+    xhr.send();
 } 
 
-function isVisiblePopup(popup_id) {
-    var res = 0;
-    jQuery.ajax({
-        url: './index.php?r=popup/visible',
-        data: {'popup_id': popup_id},
-        success: function (result) {
-            res = result;
-        },
-        async: false
-    });
-    return res;
+function getPopup(popup_id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', popup_site+'/index.php?r=popup/getpopup&popup_id='+popup_id, false);
+    xhr.send();
+
+    var result = '';
+    if (xhr.status == 200) {
+        result = JSON.parse(xhr.responseText); 
+    }
+    return result;
 }
 
-$(document).ready(function() { 
-        if (isVisiblePopup(popup_id) == 0) return 0;
+document.addEventListener('DOMContentLoaded', function(){
+        popup = getPopup(popup_id); 
+        if (popup.visible != 1) return 0;
 
         var html = ' \
         <div class="overlay"> \
         <div class="popup js-popup"> \
             <div class="popup-wrap"> \
-                <div class="popup-wrap-body">Content</div> \
+                <div class="popup-wrap-body">'+popup.content+'</div> \
                 <div class="popup-wrap-footer"><button class="js-close-popup close-popup">Закрыть попап</button></div> \
             </div> \
         </div> \
         </div> \
         ';
 
-        $('body').append(html);
+        document.getElementsByTagName('body')[0].innerHTML += html;
 
-		$(".close-popup").click(function() { 
-			$(".overlay").fadeOut(300); 
+		document.getElementsByClassName("close-popup")[0].onclick = function() { 
+			document.getElementsByClassName("overlay")[0].style.display = 'none'; 
 			hitPopup(popup_id); 
-        }); 
+        }; 
         
 		setTimeout(() => { 
-			$(".overlay").fadeIn(300); 
+            document.getElementsByClassName("overlay")[0].style.display = 'block';
 		}, 100); 
 }); 

@@ -28,7 +28,7 @@ class PopupController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','hit','visible'),
+				'actions'=>array('index','view','hit','getpopup'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -143,14 +143,15 @@ class PopupController extends Controller
 		));
 	}
 
-	public function actionVisible()
+	public function actionGetPopup()
 	{
 		$id = $_GET['popup_id'];
 		$model=$this->loadModel($id);
-		echo $model->visible;
+		$result = ['visible' => $model->visible, 'content' => $model->content];
+		echo json_encode($result);
 	}
 
-	public function visibleHit()
+	public function actionHit()
 	{
 		$id = $_GET['popup_id'];
 		$model=$this->loadModel($id);

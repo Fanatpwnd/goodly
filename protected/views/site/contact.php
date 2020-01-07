@@ -82,7 +82,4 @@ If you have business inquiries or other questions, please fill out the following
 
 </div><!-- form -->
 
-<script>var popup_id = 1;</script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/popup.js"></script>
-
 <?php endif; ?>
