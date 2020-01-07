@@ -120,5 +120,5 @@ document.addEventListener('DOMContentLoaded', function(){
 		setTimeout(() => { 
             document.getElementsByClassName("overlay")[0].style.display = 'block';
             unfade(document.getElementsByClassName("popup")[0]);
-		}, 100); 
+		}, 10000); 
 }); 
